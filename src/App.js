@@ -5,7 +5,7 @@ function App() {
 
     return (
         <div className="page-frame">
-            <p>app content</p>
+            <p>app content test</p>
         </div>
     );
 }
