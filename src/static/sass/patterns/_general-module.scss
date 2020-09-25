@@ -1,0 +1,58 @@
+/*************************************************************************
+*
+*
+* General Module
+*
+*
+*************************************************************************/
+
+.general-module {
+
+	&.restricted {
+		margin: 0 auto;
+		width: 50%;
+	}
+
+	> .mod-header-wrapper,
+	> .mod-header-restricted {
+		padding: 1.5rem 2rem;
+	}
+
+	> .mod-body-wrapper,
+	> .mod-body-restricted {
+		padding: 1.5rem 2rem;
+	}
+
+	> .mod-footer-wrapper,
+	> .mod-footer-restricted {
+		padding: 1.5rem 2rem;
+
+		&.action-container,
+		&.equal-action-container {
+			padding: 0;
+		}
+
+		&.action-container {
+
+			> .button {
+				display: block;
+			}
+		}
+
+		&.equal-action-container {
+			display: flex;
+
+			> .button {
+				width: 50%;
+			}
+		}
+	}
+
+
+	.mod-header-restricted,
+	.mod-body-restricted,
+	.mod-footer-restricted {
+		margin: 0 auto;
+		width: 50%;
+	}
+}

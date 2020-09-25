@@ -1,0 +1,31 @@
+/*************************************************************************
+*
+*
+* Typography
+*
+*
+*************************************************************************/
+
+h1, h2, h3, h4, h5, h6 {
+	color: $black;
+	font-weight: 100;
+
+	&:last-child {
+		margin: 0;
+	}
+}
+
+h2 {
+	font-size: 1.75rem;
+	line-height: 2rem;
+	margin: 0 0 1rem;
+}
+
+p {
+	color: $black;
+	margin: 0 0 .75rem 0;
+
+	&:last-child {
+		margin: 0;
+	}
+}

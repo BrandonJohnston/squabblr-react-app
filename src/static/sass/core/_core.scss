@@ -1,0 +1,23 @@
+/*************************************************************************
+*
+*
+* Core
+*
+*
+*************************************************************************/
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 100%; // 16px
+}
+
+body {
+	background: $white;
+	color: $black;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 1rem; // Set application base font-size to 16px
+	line-height: 1.25rem; // Set base line-height to 20px
+}

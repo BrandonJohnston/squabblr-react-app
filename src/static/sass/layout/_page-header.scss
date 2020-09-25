@@ -1,0 +1,29 @@
+/*************************************************************************
+*
+*
+* Page Header
+*
+*
+*************************************************************************/
+.page-header {
+	background: $blue;
+	height: 5rem;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+
+	&:before {
+		border-bottom: 1px solid $blue-darker;
+		bottom: 0;
+		content: '';
+		height: 0;
+		left: 0;
+		position: absolute;
+		right: 0;
+	}
+
+	h2 {
+		color: $white;
+	}
+}
