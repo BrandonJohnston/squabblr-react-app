@@ -1,0 +1,55 @@
+/*************************************************************************
+*
+*
+* Inline List
+*
+*
+*************************************************************************/
+
+%button-base {
+	cursor: pointer;
+	font-size: .875rem;
+	padding: .75rem 1rem;
+	position: relative;
+	text-align: center;
+
+	&:before {
+		bottom: 0;
+		content: '';
+		left: 0;
+		position: absolute;
+		transition: all .15s ease-in-out;
+		top: 0;
+		width: .125rem;
+	}
+
+	&:hover {
+
+		&:before {
+			width: .5rem;
+		}
+	}
+}
+
+.button-general {
+	@extend %button-base;
+
+	background: $gray-lighter;
+	color: $black;
+
+	&:before {
+		background: $gray-light;
+	}
+}
+
+.button-primary {
+	@extend %button-base;
+
+	background: $blue;
+	color: $white;
+
+	&:before {
+		background: $blue-dark;
+	}
+}
+
