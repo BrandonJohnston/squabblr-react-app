@@ -4,6 +4,9 @@ export const SignupSlice = createSlice({
 	name: 'signup',
 	initialState: {
 		step: 1,
+		username: null,
+		password: null,
+		email: null
 	},
 	reducers: {
 		incrementStep: state => {
@@ -15,16 +18,27 @@ export const SignupSlice = createSlice({
 		},
 		decrementStep: state => {
 			state.step -= 1;
+		},
+		setUsername: (state, action) => {
+			state.username = action.payload;
+		},
+		setPassword: (state, action) => {
+			state.password = action.payload;
+		},
+		setEmail: (state, action) => {
+			state.email = action.payload;
 		}
 	},
 });
 
-export const { incrementStep, decrementStep } = SignupSlice.actions;
+export const { incrementStep, decrementStep, setUsername, setPassword, setEmail } = SignupSlice.actions;
 
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
 export const selectStep = state => state.signup.step;
+export const selectUsername = state => state.signup.username;
+export const selectEmail = state => state.signup.email;
 
 export default SignupSlice.reducer;

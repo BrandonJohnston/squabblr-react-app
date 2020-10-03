@@ -14,7 +14,13 @@
 
 	> .mod-header-wrapper,
 	> .mod-header-restricted {
+		background: $blue;
+		border-bottom: 1px solid $blue-darker;
 		padding: 1.5rem 2rem;
+
+		h2 {
+			color: $white;
+		}
 	}
 
 	> .mod-body-wrapper,

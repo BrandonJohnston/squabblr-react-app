@@ -3,9 +3,8 @@ import React from 'react';
 // Import Redux / State management
 import { useSelector, useDispatch } from 'react-redux';
 import {
-	incrementStep,
-	decrementStep,
-	selectStep,
+	incrementStep, decrementStep,
+	selectStep, selectUsername, selectEmail,
 } from './SignupSlice';
 
 // Import Templates
@@ -19,6 +18,8 @@ import SqButton from "../../components/Button/SqButton";
 function SqSignup() {
 
 	const step = useSelector(selectStep);
+	const username = useSelector(selectUsername);
+	const email = useSelector(selectEmail);
 	const dispatch = useDispatch();
 
 	/*
@@ -43,16 +44,13 @@ function SqSignup() {
 		<div className={'general-module restricted signup-page'}>
 			<div className={'mod-header-wrapper'}>
 				<h2>Signup</h2>
-				<p>{ step }</p>
 			</div>
-			<div className={'mod-body-wrapper'}>
-				{step === 1 &&
-					<SqSignupStepOne/>
-				}
-				{step === 2 &&
-					<SqSignupStepTwo/>
-				}
-			</div>
+			{step === 1 &&
+				<SqSignupStepOne/>
+			}
+			{step === 2 &&
+				<SqSignupStepTwo/>
+			}
 			<div className={'mod-footer-wrapper equal-action-container'}>
 				<SqButton buttonText={'Back'}
 						  buttonType={'button-general'}
