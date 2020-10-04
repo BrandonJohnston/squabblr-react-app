@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Import Redux / State management
 import { useSelector, useDispatch } from 'react-redux';
 import {
-	incrementStep, decrementStep,
-	selectStep, selectUsername, selectEmail,
+	INCREMENT_STEP, DECREMENT_STEP,
+	SELECT_STEP, SELECT_USERNAME, SELECT_EMAIL,
 } from './SignupSlice';
 
 // Import Templates
@@ -17,27 +17,43 @@ import SqButton from "../../components/Button/SqButton";
 // Signup Function
 function SqSignup() {
 
-	const step = useSelector(selectStep);
-	const username = useSelector(selectUsername);
-	const email = useSelector(selectEmail);
+	// Local state
+	const [backButtonDisabled, setbackButtonDisabled] = useState(true);
+
+	// Store state
+	const step = useSelector(SELECT_STEP);
+	const username = useSelector(SELECT_USERNAME);
+	const email = useSelector(SELECT_EMAIL);
 	const dispatch = useDispatch();
 
 	/*
 	 * onNext - handle 'Next' button clicks
 	 */
 	function onNext() {
+
 		if (step < 3) {
-			dispatch(incrementStep());
+			dispatch(INCREMENT_STEP());
 		}
+
+		// update button state
+		setbackButtonDisabled(false);
 	}
 
 	/*
 	 * onBack - handle 'Back' button clicks
 	 */
 	function onBack() {
+
+		console.log('onBack()');
+		console.log(step);
+
 		if (step > 1) {
-			dispatch(decrementStep());
+			dispatch(DECREMENT_STEP());
 		}
+
+		console.log(step);
+		// update button state
+		setbackButtonDisabled(step === 1);
 	}
 
 	return (
@@ -52,11 +68,12 @@ function SqSignup() {
 				<SqSignupStepTwo/>
 			}
 			<div className={'mod-footer-wrapper equal-action-container'}>
-				<SqButton buttonText={'Back'}
-						  buttonType={'button-general'}
-						  onClick={ () => onBack() } />
-				<SqButton buttonText={'Next'}
-						  buttonType={'button-primary'}
+				<SqButton buttonText={ 'Back' }
+						  buttonType={ 'button-general' }
+						  onClick={ () => onBack() }
+						  isDisabled={ backButtonDisabled } />
+				<SqButton buttonText={ 'Next' }
+						  buttonType={ 'button-primary' }
 						  onClick={ () => onNext() } />
 			</div>
 		</div>

@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 // Import Redux / State management
 import { useSelector, useDispatch } from 'react-redux';
 import {
-	setUsername,
-	setPassword,
+	SET_USERNAME,
+	SET_PASSWORD,
 } from '../SignupSlice';
 
 // Import Components
@@ -18,14 +18,14 @@ function SqSignupStepOne() {
 	 * onUsernameChange - handle change to username
 	 */
 	function onUsernameChange(userName) {
-		dispatch(setUsername(userName));
+		dispatch(SET_USERNAME(userName));
 	}
 
 	/*
 	 * onPasswordChange - handle change to username
 	 */
 	function onPasswordChange(password) {
-		dispatch(setPassword(password));
+		dispatch(SET_PASSWORD(password));
 	}
 
 	return (
