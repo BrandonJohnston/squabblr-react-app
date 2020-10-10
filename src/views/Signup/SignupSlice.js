@@ -1,4 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+export const DECREMENT_STEP = createAsyncThunk(
+	'signup/decrement_step_test',
+	async (currStep)  => {
+		const response = await currStep - 1;
+		return response;
+	}
+);
 
 export const SignupSlice = createSlice({
 	name: 'signup',
@@ -16,9 +24,6 @@ export const SignupSlice = createSlice({
 			// immutable state based off those changes
 			state.step += 1;
 		},
-		DECREMENT_STEP: state => {
-			state.step -= 1;
-		},
 		SET_USERNAME: (state, action) => {
 			state.username = action.payload;
 		},
@@ -29,9 +34,15 @@ export const SignupSlice = createSlice({
 			state.email = action.payload;
 		}
 	},
+	extraReducers: {
+		// Add reducers for additional action types here, and handle loading state as needed
+		[DECREMENT_STEP.fulfilled]: (state, action) => {
+			state.step -= 1;
+		}
+	}
 });
 
-export const { INCREMENT_STEP, DECREMENT_STEP, SET_USERNAME, SET_PASSWORD, SET_EMAIL } = SignupSlice.actions;
+export const { INCREMENT_STEP, SET_USERNAME, SET_PASSWORD, SET_EMAIL } = SignupSlice.actions;
 
 
 // The function below is called a selector and allows us to select a value from

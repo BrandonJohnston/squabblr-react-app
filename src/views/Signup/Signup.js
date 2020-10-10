@@ -44,16 +44,12 @@ function SqSignup() {
 	 */
 	function onBack() {
 
-		console.log('onBack()');
-		console.log(step);
-
 		if (step > 1) {
-			dispatch(DECREMENT_STEP());
+			dispatch(DECREMENT_STEP(step)).then( (response) => {
+				// update button state
+				setbackButtonDisabled(response.payload === 1);
+			});
 		}
-
-		console.log(step);
-		// update button state
-		setbackButtonDisabled(step === 1);
 	}
 
 	return (

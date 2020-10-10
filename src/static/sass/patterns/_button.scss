@@ -29,6 +29,17 @@
 			width: .5rem;
 		}
 	}
+
+	&.disabled {
+		cursor: auto;
+
+		&:hover {
+
+			&:before {
+				width: .125rem;
+			}
+		}
+	}
 }
 
 .button-general {

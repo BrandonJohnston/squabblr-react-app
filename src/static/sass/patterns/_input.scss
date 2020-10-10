@@ -6,7 +6,7 @@
 *
 *************************************************************************/
 
-.sq-input {
+.sq-input-wrapper {
 	padding-top: 1.5rem;
 	position: relative;
 
@@ -24,7 +24,7 @@
 		margin-bottom: .5rem;
 		position: relative;
 		transform: translate(20px, 40px);
-		transition: .25s ease-in-out;
+		transition: .175s ease-in-out;
 		z-index: 1;
 	}
 
@@ -61,6 +61,22 @@
 
 		.label-text {
 			transform: translate(0px, 0px);
+		}
+	}
+
+	&.input-invalid {
+		border-color: $red;
+
+		.input-wrapper {
+
+			&:before {
+				background: $red;
+			}
+		}
+
+		.sq-input {
+			border-color: $red;
+			color: $red;
 		}
 	}
 }
