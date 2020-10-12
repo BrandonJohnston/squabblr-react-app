@@ -51,6 +51,10 @@
 	&:before {
 		background: $gray-light;
 	}
+
+	&.disabled {
+		color: $gray;
+	}
 }
 
 .button-primary {
@@ -61,6 +65,10 @@
 
 	&:before {
 		background: $blue-dark;
+	}
+
+	&.disabled {
+		color: $blue-dark;
 	}
 }
 

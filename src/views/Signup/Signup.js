@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
 	INCREMENT_STEP, DECREMENT_STEP,
-	SELECT_STEP, SELECT_USERNAME, SELECT_EMAIL,
+	SELECT_STEP, SELECT_USERNAME, SELECT_PASSWORD, SELECT_EMAIL,
 } from './SignupSlice';
 
 // Import Templates
@@ -23,6 +23,7 @@ function SqSignup() {
 	// Store state
 	const step = useSelector(SELECT_STEP);
 	const username = useSelector(SELECT_USERNAME);
+	const password = useSelector(SELECT_PASSWORD);
 	const email = useSelector(SELECT_EMAIL);
 	const dispatch = useDispatch();
 
@@ -70,7 +71,8 @@ function SqSignup() {
 						  isDisabled={ backButtonDisabled } />
 				<SqButton buttonText={ 'Next' }
 						  buttonType={ 'button-primary' }
-						  onClick={ () => onNext() } />
+						  onClick={ () => onNext() }
+						  isDisabled={ !username || !password } />
 			</div>
 		</div>
 	);

@@ -50,6 +50,7 @@ export const { INCREMENT_STEP, SET_USERNAME, SET_PASSWORD, SET_EMAIL } = SignupS
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
 export const SELECT_STEP = state => state.signup.step;
 export const SELECT_USERNAME = state => state.signup.username;
+export const SELECT_PASSWORD = state => state.signup.password;
 export const SELECT_EMAIL = state => state.signup.email;
 
 export default SignupSlice.reducer;

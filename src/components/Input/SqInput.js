@@ -9,6 +9,7 @@ function SqInput(props) {
 	 * (@string) customClass - custom class applied to input wrapper
 	 * (@string) inputType - type of input element (text, number, etc)
 	 * (@function) onChange - function to call when input value changes
+	 * (@function) onBlur - function to call when user blur input
 	 */
 
 	const [inputFocus, setInputFocus] = useState(false);
@@ -26,18 +27,22 @@ function SqInput(props) {
 
 
 	/*
-	 * handleFocus - handle focus / blue events
+	 * handleFocus - handle focus / blur events
 	 */
 	function handleFocus(focus) {
 		setInputFocus(focus);
+
+		if (props.onBlur) {
+			props.onBlur();
+		}
 	}
 
 	return (
 		<div className={ 'sq-input-wrapper ' + props.customClass +
-			(inputFocus ? ' input-focus' : '') +
-			(inputFilled ? ' input-filled' : '') +
-			(props.invalid ? ' input-invalid' : '') }
-			 onChange={ (e) => handleChange(e) }>
+			 (inputFocus ? ' input-focus' : '') +
+			 (inputFilled ? ' input-filled' : '') +
+			 (props.invalid ? ' input-invalid' : '') }
+			 >
 
 			<label className={'input-label'}>
 				{props.label &&
@@ -48,6 +53,7 @@ function SqInput(props) {
 						   type={ props.inputType ? props.inputType : 'text' }
 						   onFocus={ () => handleFocus(true) }
 						   onBlur={ () => handleFocus(false) }
+						   onChange={ (e) => handleChange(e) }
 					/>
 					{props.invalid &&
 						<SqTooltip type={ 'error' }

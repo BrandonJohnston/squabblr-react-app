@@ -10,6 +10,10 @@
 	&.restricted {
 		margin: 0 auto;
 		width: 50%;
+
+		@media all and (max-width: 800px) {
+			width: 90%;
+		}
 	}
 
 	> .mod-header-wrapper,
