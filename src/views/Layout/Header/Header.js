@@ -5,7 +5,7 @@ function SqHeader() {
 	return (
 		<header className={'general-module page-header'}>
 			<div className={'mod-header-wrapper'}>
-				<h2>Squabblr</h2>
+				<h2 className={'header-logo'}>Squabblr</h2>
 			</div>
 		</header>
 	);
