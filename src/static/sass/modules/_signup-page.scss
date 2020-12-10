@@ -7,4 +7,12 @@
 *************************************************************************/
 .signup-page {
 	padding: 2rem 0;
+
+	.mod-body-wrapper {
+		padding-top: .5rem;
+	}
+
+	.email-tip, .name-tip {
+		width: 20rem;
+	}
 }

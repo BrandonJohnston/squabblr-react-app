@@ -14,7 +14,8 @@ export const SignupSlice = createSlice({
 		step: 1,
 		username: null,
 		password: null,
-		email: null
+		email: null,
+		name: null
 	},
 	reducers: {
 		INCREMENT_STEP: state => {
@@ -32,6 +33,9 @@ export const SignupSlice = createSlice({
 		},
 		SET_EMAIL: (state, action) => {
 			state.email = action.payload;
+		},
+		SET_NAME: (state, action) => {
+			state.name = action.payload;
 		}
 	},
 	extraReducers: {
@@ -42,7 +46,7 @@ export const SignupSlice = createSlice({
 	}
 });
 
-export const { INCREMENT_STEP, SET_USERNAME, SET_PASSWORD, SET_EMAIL } = SignupSlice.actions;
+export const { INCREMENT_STEP, SET_USERNAME, SET_PASSWORD, SET_EMAIL, SET_NAME } = SignupSlice.actions;
 
 
 // The function below is called a selector and allows us to select a value from
@@ -52,5 +56,6 @@ export const SELECT_STEP = state => state.signup.step;
 export const SELECT_USERNAME = state => state.signup.username;
 export const SELECT_PASSWORD = state => state.signup.password;
 export const SELECT_EMAIL = state => state.signup.email;
+export const SELECT_NAME = state => state.signup.name;
 
 export default SignupSlice.reducer;

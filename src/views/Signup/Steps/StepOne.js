@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // Import Redux / State management
 import { useDispatch } from 'react-redux';
@@ -10,86 +10,58 @@ import {
 // Import Components
 import SqInput from "../../../components/Input/SqInput";
 
-// Import Constants
-import { LETTER_NUMBER_REGEX, LETTER_NUMBER_SPECIAL_REGEX } from "../../../utils/GeneralConstants";
+function SqSignupStepOne(props) {
 
-function SqSignupStepOne() {
+	/*
+	 * (@string) usernameVal - default value of username input
+	 * (@boolean) usernameInvalid - is the username invalid
+	 * (@string) passwordVal - default value of password input
+	 * (@boolean) passwordInvalid - is the password invalid
+	 */
 
-	// Local state
-	const [usernameInvalid, setUsernameInvalid] = useState(false);
-	const [usernameErrorText, setUsernameErrorText] = useState('');
-	const [passwordInvalid, setPasswordInvalid] = useState(false);
-	const [passwordErrorText, setPasswordErrorText] = useState('');
+	// Local state / variables
+	const usernameErrorText = 'Username can only contain letters, numbers, and "-" or "_"';
+	const passwordErrorText = 'Password is invalid';
 
 	// Store state
 	const dispatch = useDispatch();
 
 	/*
-	 * onUsernameChange - handle change to username
+	 * onUsernameChange - handle change to username input
 	 */
 	function onUsernameChange(userName) {
 
-		const validUsername = new RegExp(LETTER_NUMBER_REGEX, 'i');
-
-		if (validUsername.test(userName) || userName.length === 0) {
-
-			if (usernameInvalid) {
-				setUsernameInvalid(false);
-				setUsernameErrorText('');
-			}
-
-			// Username is valid, save it to the store
-			dispatch(SET_USERNAME(userName));
-
-		} else {
-
-			// Username is not valid, display an error
-			setUsernameInvalid(true);
-			setUsernameErrorText('Username can only contain letters, numbers, and "-" or "_"');
-		}
+		// Username changed, save it to the store
+		dispatch(SET_USERNAME(userName));
 	}
 
 	/*
-	 * onPasswordChange - handle change to username
+	 * onPasswordChange - handle change to password input
 	 */
 	function onPasswordChange(password) {
 
-		const validPassword = new RegExp(LETTER_NUMBER_SPECIAL_REGEX, 'i');
-
-
-		if (validPassword.test(password) || password.length === 0) {
-
-			if (passwordInvalid) {
-				setPasswordInvalid(false);
-				setPasswordErrorText('');
-			}
-
-			// Password is valid, save it to the store
-			dispatch(SET_PASSWORD(password));
-
-		} else {
-
-			// Password is not valid, display an error
-			setPasswordInvalid(true);
-			setPasswordErrorText('Password is invalid');
-		}
+		// Password changed, save it to the store
+		dispatch(SET_PASSWORD(password));
 	}
 
 	return (
 		<div className={'mod-body-wrapper'}>
-
-			<SqInput label={ 'Username' }
+			<SqInput placeholder={ 'Enter a Username' }
+					 label={ 'Username' }
 					 customClass={ 'username-input' }
+					 defaultValue={ props.usernameVal }
 					 inputType={ 'text' }
-					 invalid={ usernameInvalid }
+					 invalid={ props.usernameInvalid }
 					 errorText={ usernameErrorText }
 					 tooltipPosition={ 'bottom' }
 					 onChange={ (value) => onUsernameChange(value) } />
 
-			<SqInput label={ 'Password' }
+			<SqInput placeholder={ 'Enter a Password' }
+					 label={ 'Password' }
 					 customClass={ 'password-input' }
+					 defaultValue={ props.passwordVal }
 					 inputType={ 'password' }
-					 invalid={ passwordInvalid }
+					 invalid={ props.passwordInvalid }
 					 errorText={ passwordErrorText }
 					 tooltipPosition={ 'bottom' }
 					 onChange={ (value) => onPasswordChange(value) } />

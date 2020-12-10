@@ -6,13 +6,14 @@ function SqInput(props) {
 	/*
 	 * (@string) value - pre-defined input value
 	 * (@string) label - input element label text
+	 * (@string) placeholder - placeholder text
 	 * (@string) customClass - custom class applied to input wrapper
 	 * (@string) inputType - type of input element (text, number, etc)
+	 * (@string) defaultValue - default value for input element
 	 * (@function) onChange - function to call when input value changes
 	 * (@function) onBlur - function to call when user blur input
 	 */
 
-	const [inputFocus, setInputFocus] = useState(false);
 	const [inputFilled, setInputFilled] = useState(false);
 
 	/*
@@ -22,28 +23,29 @@ function SqInput(props) {
 
 		const val = event.target.value;
 		setInputFilled(val.length > 0);
-		props.onChange(val);
-	}
 
+		if (props.onChange) {
+			props.onChange(val);
+		}
+	}
 
 	/*
 	 * handleFocus - handle focus / blur events
 	 */
-	function handleFocus(focus) {
-		setInputFocus(focus);
+	function handleFocus(event) {
 
 		if (props.onBlur) {
-			props.onBlur();
+			const val = event && event.target ? event.target.value : '';
+			props.onBlur(val);
 		}
 	}
 
 	return (
 		<div className={ 'sq-input-wrapper ' + props.customClass +
-			 (inputFocus ? ' input-focus' : '') +
 			 (inputFilled ? ' input-filled' : '') +
+			 (props.icon ? ' has-icon' : '') +
 			 (props.invalid ? ' input-invalid' : '') }
 			 >
-
 			<label className={'input-label'}>
 				{props.label &&
 					<p className={'label-text'}>{ props.label }</p>
@@ -51,18 +53,21 @@ function SqInput(props) {
 				<div className={'input-wrapper'}>
 					<input className={'sq-input'}
 						   type={ props.inputType ? props.inputType : 'text' }
-						   onFocus={ () => handleFocus(true) }
-						   onBlur={ () => handleFocus(false) }
+						   placeholder={ props.placeholder ? props.placeholder : '' } defaultValue={ props.defaultValue }
+						   onFocus={ () => handleFocus(null) }
+						   onBlur={ (e) => handleFocus(e) }
 						   onChange={ (e) => handleChange(e) }
 					/>
-					{props.invalid &&
-						<SqTooltip type={ 'error' }
-								   position={ props.tooltipPosition }>
-							<p>{ props.errorText }</p>
-						</SqTooltip>
-					}
+					{props.icon}
 				</div>
 			</label>
+
+			{props.invalid &&
+				<SqTooltip type={ 'error' }
+							position={ props.tooltipPosition }>
+					<p>{ props.errorText }</p>
+				</SqTooltip>
+			}
 		</div>
 	);
 }

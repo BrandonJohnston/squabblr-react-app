@@ -7,12 +7,8 @@
 *************************************************************************/
 
 .sq-input-wrapper {
-	padding-top: 1.5rem;
+	padding: 1.5rem 0;
 	position: relative;
-
-	&:first-child {
-		padding-top: 0;
-	}
 
 	.input-label {
 		font-size: .875rem;
@@ -21,35 +17,25 @@
 	.label-text {
 		color: $blue-darker;
 		display: inline-block;
+		font-size: .75rem;
+		font-weight: bold;
 		margin-bottom: .5rem;
-		position: relative;
-		transform: translate(20px, 40px);
-		transition: .175s ease-in-out;
-		z-index: 1;
 	}
 
 	.input-wrapper {
 		position: relative;
-
-		&:before {
-			background: $blue-darker;
-			bottom: 0;
-			content: '';
-			left: 0;
-			position: absolute;
-			top: 0;
-			width: .5rem;
-			z-index: 1;
-		}
 	}
 
 	.sq-input {
 		background: $gray-lighter;
 		border: 1px solid $blue-darker;
+		border-left: 8px solid $blue-darker;
 		color: $blue-darker;
 		display: block;
-		line-height: 1.125rem;
-		padding: .75rem 1rem;
+		font-size: 1.25rem;
+		font-weight: 100;
+		line-height: 1.75rem;
+		padding: .75rem 1.5rem .75rem 1rem;
 		width: 100%;
 
 		&:focus {
@@ -57,22 +43,22 @@
 		}
 	}
 
-	&.input-focus, &.input-filled {
+	&.has-icon {
+		.sq-input {
+			padding-right: 3rem;
+		}
 
-		.label-text {
-			transform: translate(0px, 0px);
+		.sq-icon-wrapper {
+			height: 100%;
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 3rem;
 		}
 	}
 
 	&.input-invalid {
 		border-color: $red;
-
-		.input-wrapper {
-
-			&:before {
-				background: $red;
-			}
-		}
 
 		.sq-input {
 			border-color: $red;
