@@ -12,6 +12,15 @@
 		padding-top: .5rem;
 	}
 
+	.username-unavail-tip, .password-invalid-tip, .email-invalid-tip {
+		max-width: 20rem;
+		white-space: nowrap;
+	}
+
+	.username-invalid-tip {
+		width: 20rem;
+	}
+
 	.email-tip, .name-tip {
 		width: 20rem;
 	}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 // Import Redux / State management
 import { useDispatch } from 'react-redux';
@@ -9,30 +9,21 @@ import {
 
 // Import Components
 import SqInput from "../../../components/Input/SqInput";
-import SqTooltip from "../../../components/Tooltip/SqTooltip";
-
-// Import Constants
-import { EMAIL_REGEX } from "../../../utils/GeneralConstants";
 import SqIcon from '../../../components/Icon/SqIcon';
+
 
 function SqSignupStepTwo(props) {
 
 	/*
 	 * (@string) emailVal - default value of email input
-	 * (@string) nameVal - defualt value of name input
+	 * (@boolean) emailInvalid - is the email invalid
+	 * (@string) nameVal - default value of name input
 	 */
 
-	// Local state
-	const [emailInvalid, setEmailInvalid] = useState(false);
-	useEffect(() => {
-
-		// Check email validity on render (such as returning to signup from a different view)
-		if (props.hasOwnProperty('emailVal') && props.emailVal !== null && props.emailVal.length > 0) {
-			onEmailBlur(props.emailVal);
-		}
-	}, [props.emailVal]);
-
-	const [emailErrorText, setEmailErrorText] = useState('');
+	// Local state / variables
+	const emailTipText = 'Your email address is optional; however, we may it use to communicate with you from time to time or to provide functionality such as resetting your password.';
+	const emailErrorText = 'Email is invalid';
+	const nameTipText = 'Your name is optional; however, we may it use to customize content for you.';
 
 	// Store state
 	const dispatch = useDispatch();
@@ -41,23 +32,6 @@ function SqSignupStepTwo(props) {
 	 * onEmailChange - handle change to email input
 	 */
 	function onEmailBlur(email) {
-
-		const validEmail = new RegExp(EMAIL_REGEX, 'i');
-
-		if (validEmail.test(email) || email.length === 0) {
-
-			if (emailInvalid) {
-				// email was invalid - reset error tooltip
-				setEmailInvalid(false);
-				setEmailErrorText('');
-			}
-
-		} else {
-
-			// Email is not valid, display an error
-			setEmailInvalid(true);
-			setEmailErrorText('Email is invalid');
-		}
 
 		// Save input value to the store
 		dispatch(SET_EMAIL(email));
@@ -73,28 +47,54 @@ function SqSignupStepTwo(props) {
 	}
 
 	/*
-	 * getEmailIcon - renders an icon and tooltip for email input field
+	 * getEmailIcon - return an icon to render in email input field
 	 */
 	function getEmailIcon() {
+
+		if (props.emailInvalid) {
+			return getEmailInvalidIcon();
+		} else {
+			return getEmailTipIcon();
+		}
+	}
+
+	/*
+	 * getEmailTipIcon - renders an icon and tooltip email info
+	 */
+	function getEmailTipIcon() {
 		return(
 			<SqIcon hasTooltip={ true }
 					outsideClick={ true }
 					tooltipClass={ 'email-tip' }
-					tooltipText={ 'Your email address is optional; however, we may it use to communicate with you from time to time or to provide functionality such as reseting your password.' } />
+					tooltipText={ emailTipText } />
 		);
 	}
 
 	/*
-	 * getNameIcon - renders an icon and tooltip for name input field
+	 * getEmailInvalidIcon - renders icon and tooltip for invalid email
+	 */
+	function getEmailInvalidIcon() {
+		return(
+			<SqIcon hasTooltip={ true }
+					outsideClick={ true }
+					tooltipClass={ 'email-invalid-tip' }
+					tooltipType={ 'error' }
+					tooltipText={ emailErrorText } />
+		);
+	}
+
+	/*
+	 * getNameIcon - renders an icon and tooltip name info
 	 */
 	function getNameIcon() {
 		return(
 			<SqIcon hasTooltip={ true }
 					outsideClick={ true }
 					tooltipClass={ 'name-tip' }
-					tooltipText={ 'Your name is optional; however, we may it use to customize content for you.' } />
+					tooltipText={ nameTipText } />
 		);
 	}
+
 
 	return (
 		<div className={'mod-body-wrapper'}>
@@ -103,9 +103,7 @@ function SqSignupStepTwo(props) {
 					 customClass={ 'email-input' }
 					 defaultValue={ props.emailVal }
 					 inputType={ 'email' }
-					 invalid={ emailInvalid }
-					 errorText={ emailErrorText }
-					 tooltipPosition={ 'bottom' }
+					 invalid={ props.emailInvalid }
 					 icon={ getEmailIcon() }
 					 onBlur={ (value) => onEmailBlur(value) } />
 

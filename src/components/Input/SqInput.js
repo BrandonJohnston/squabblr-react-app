@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import SqTooltip from "../Tooltip/SqTooltip";
 
 function SqInput(props) {
 
@@ -54,20 +53,13 @@ function SqInput(props) {
 					<input className={'sq-input'}
 						   type={ props.inputType ? props.inputType : 'text' }
 						   placeholder={ props.placeholder ? props.placeholder : '' } defaultValue={ props.defaultValue }
-						   onFocus={ () => handleFocus(null) }
+						   onFocus={ (e) => handleFocus(e) }
 						   onBlur={ (e) => handleFocus(e) }
 						   onChange={ (e) => handleChange(e) }
 					/>
 					{props.icon}
 				</div>
 			</label>
-
-			{props.invalid &&
-				<SqTooltip type={ 'error' }
-							position={ props.tooltipPosition }>
-					<p>{ props.errorText }</p>
-				</SqTooltip>
-			}
 		</div>
 	);
 }

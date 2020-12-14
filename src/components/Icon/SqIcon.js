@@ -8,27 +8,28 @@ function SqIcon(props) {
 	 * (@boolean) hasTooltip - does the icon include a tooltip
      * (@string) tooltipClass - class to put on the tooltip component
 	 * (@string) tooltipText - text for the tooltip
+	 * (@string) tooltipType - type for the tooltip
      * (@boolean) outsideClick - should outside click close the tooltip
 	 */
 
-    const [showTooltip, setshowTooltip] = useState(false);
+    const [showTooltip, setShowTooltip] = useState(false);
     const myRef = useRef();
 
     /*
      * handleClickOutside - handle clicks outside of icon / content (hide the tooltip)
-     */ 
+     */
     const handleClickOutside = e => {
         if (props.outsideClick && !myRef.current.contains(e.target)) {
-            setshowTooltip(false);
+            setShowTooltip(false);
         }
     }
 
     /*
      * handleClickInside - handle clicks inside of icon / content (show the tooltip)
-     */ 
+     */
     const handleClickInside = () => {
         const tooltip = props.hasTooltip ? !showTooltip : false;
-        setshowTooltip(tooltip);
+        setShowTooltip(tooltip);
     }
 
     useEffect(() => {
@@ -36,22 +37,14 @@ function SqIcon(props) {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     });
 
-	/*
-	 * handleClick - user clicked the icon - show the tooltip
-	 */
-	function handleClick() {
-        console.log('handleClick()');
-        const tooltip = props.hasTooltip ? !showTooltip : false;
-        setshowTooltip(tooltip);
-	}
 
 	return (
         <span className={ 'sq-icon-wrapper' }
               ref={myRef}>
                 <span className={ 'icon' } onClick={ () => handleClickInside() }>X</span>
                 {props.hasTooltip && showTooltip &&
-                    <SqTooltip type={ 'info' }
-                               position={ 'bottom-right' } 
+                    <SqTooltip type={ props.tooltipType ? props.tooltipType : 'info' }
+                               position={ 'bottom-right' }
                                customClass={ props.tooltipClass }>
                         <p>{ props.tooltipText }</p>
                     </SqTooltip>
