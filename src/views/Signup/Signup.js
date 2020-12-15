@@ -15,7 +15,7 @@ import SqSignupStepTwo from "./Steps/StepTwo";
 import SqButton from "../../components/Button/SqButton";
 
 // Import Utility Functions
-import { checkUsernameIsAvailable } from "../../utils/Users/UsersUtils";
+import { checkUsernameIsAvailable, createUser } from "../../utils/Users/UsersUtils";
 
 // Import Constants
 import { EMAIL_REGEX, LETTER_NUMBER_REGEX, LETTER_NUMBER_SPECIAL_REGEX } from "../../utils/GeneralConstants";
@@ -37,7 +37,8 @@ function SqSignup() {
 	const [usernameInvalid, setUsernameInvalid] = useState(false);
 	const [passwordInvalid, setPasswordInvalid] = useState(false);
 	const [emailInvalid, setEmailInvalid] = useState(false);
-	const [backButtonDisabled, setbackButtonDisabled] = useState(step === 1);
+	const [backButtonDisabled, setBackButtonDisabled] = useState(step === 1);
+	const [submitButtonProcessing, setSubmitButtonProcessing] = useState(false);
 	const [usernameTimeout, setUsernameTimeout] = useState();
 
 	// Handle updates to username
@@ -140,7 +141,7 @@ function SqSignup() {
 		}
 
 		// update button state
-		setbackButtonDisabled(false);
+		setBackButtonDisabled(false);
 	}
 
 	/*
@@ -151,9 +152,34 @@ function SqSignup() {
 		if (step > 1) {
 			dispatch(DECREMENT_STEP(step)).then( (response) => {
 				// update button state
-				setbackButtonDisabled(response.payload === 1);
+				setBackButtonDisabled(response.payload === 1);
 			});
 		}
+	}
+
+	/*
+	 * onSubmit - handle 'Submit' button clicks
+	 */
+	function onSubmit() {
+
+		if (submitButtonProcessing) {
+			return;
+		}
+
+		// set submit button to processing (prevent multiple clicks)
+		setSubmitButtonProcessing(true);
+
+		const userData = {
+			username: username,
+			password: password,
+			email: email,
+			name: name
+		};
+
+		createUser(userData).then(function (response) {
+			console.log('createUser() response');
+			console.log(response);
+		});
 	}
 
 	/*
@@ -223,8 +249,7 @@ function SqSignup() {
 				{step === 2 &&
 					<SqButton buttonText={ 'Submit' }
 							buttonType={ 'button-primary' }
-							onClick={ () => onNext() }
-							isDisabled={ !username || !password } />
+							onClick={ () => onSubmit() }/>
 				}
 			</div>
 		</div>

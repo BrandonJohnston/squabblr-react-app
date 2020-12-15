@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 function SqFooter() {
@@ -12,6 +12,15 @@ function SqFooter() {
 					</li>
 					<li>
 						<Link to="/about">About</Link>
+					</li>
+					<li>
+						<Link to="/login">Login</Link>
+					</li>
+					<li>
+						<Link to="/signup">Signup</Link>
+					</li>
+					<li>
+						<Link to="/dashboard">Dashboard</Link>
 					</li>
 				</ul>
 			</div>
