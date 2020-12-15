@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../../utils/Auth/AuthUtils";
 
 // Import Redux / State management
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,6 +8,7 @@ import {
 	INCREMENT_STEP, DECREMENT_STEP,
 	SELECT_STEP, SELECT_USERNAME, SELECT_PASSWORD, SELECT_EMAIL, SELECT_NAME,
 } from './SignupSlice';
+import { SET_ISAUTH, SET_USERDATA } from "../Login/UserSlice";
 
 // Import Templates
 import SqSignupStepOne from "./Steps/StepOne";
@@ -22,6 +25,10 @@ import { EMAIL_REGEX, LETTER_NUMBER_REGEX, LETTER_NUMBER_SPECIAL_REGEX } from ".
 
 // Signup Function
 function SqSignup(props) {
+
+	// Aliases
+	const history = useHistory();
+	const auth = useAuth();
 
 	// Store state
 	const step = useSelector(SELECT_STEP);
@@ -177,8 +184,31 @@ function SqSignup(props) {
 		};
 
 		createUser(userData).then(function (response) {
-			console.log('createUser() response');
-			console.log(response);
+
+			if (response.isAuthenticated) {
+
+				const authUserData = {
+					username: response.username,
+					email: response.email,
+					name: response.name,
+					signupDate: response.signupDate
+				};
+
+				// Save user data and authentication to the store
+				dispatch(SET_USERDATA(authUserData));
+				dispatch(SET_ISAUTH(true));
+
+				auth.signin( () => {
+					history.replace('/dashboard');
+				});
+
+			} else {
+
+				// Login failed, reset processing
+				setSubmitButtonProcessing(false);
+
+				// TODO: Show some type of error
+			}
 		});
 	}
 
