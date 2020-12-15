@@ -15,7 +15,7 @@ import SqSignupStepOne from "./Steps/StepOne";
 import SqSignupStepTwo from "./Steps/StepTwo";
 
 // Import Components
-import SqButton from "../../components/Button/SqButton";
+import SqButton from "../../components/SqButton/SqButton";
 
 // Import Utility Functions
 import { checkUsernameIsAvailable, createUser } from "../../utils/Users/UsersUtils";

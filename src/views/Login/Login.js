@@ -7,8 +7,8 @@ import { useDispatch } from 'react-redux';
 import { SET_USERDATA, SET_ISAUTH } from './UserSlice';
 
 // Import Components
-import SqInput from "../../components/Input/SqInput";
-import SqButton from "../../components/Button/SqButton";
+import SqInput from "../../components/SqInput/SqInput";
+import SqButton from "../../components/SqButton/SqButton";
 
 // Import Utility Functions
 import { loginUser } from "../../utils/Users/UsersUtils";
