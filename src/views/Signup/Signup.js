@@ -21,7 +21,7 @@ import { checkUsernameIsAvailable, createUser } from "../../utils/Users/UsersUti
 import { EMAIL_REGEX, LETTER_NUMBER_REGEX, LETTER_NUMBER_SPECIAL_REGEX } from "../../utils/GeneralConstants";
 
 // Signup Function
-function SqSignup() {
+function SqSignup(props) {
 
 	// Store state
 	const step = useSelector(SELECT_STEP);
@@ -217,6 +217,13 @@ function SqSignup() {
 		return !usernameValid || !passwordValid;
 	}
 
+
+	// TODO: Create a loading state
+	if (props.isLoading) {
+		return (
+			<div>Show Loading</div>
+		);
+	}
 
 	return (
 		<div className={'general-module restricted signup-page'}>

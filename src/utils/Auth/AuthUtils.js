@@ -29,6 +29,7 @@ export const useAuth = () => {
 const authContext = createContext();
 
 function useProvideAuth() {
+
 	const [user, setUser] = useState(null);
 
 	const signin = cb => {
