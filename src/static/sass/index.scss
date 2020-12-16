@@ -17,6 +17,7 @@
 @import 'patterns/input';
 @import 'patterns/icon';
 @import 'patterns/tooltip';
+@import 'patterns/popover';
 @import 'patterns/general-module';
 
 // Layout
@@ -27,3 +28,5 @@
 // Modules
 @import 'modules/page-frame';
 @import 'modules/signup-page';
+
+@import 'modules/header-user-actions-popover';

@@ -61,3 +61,18 @@ export const getUserData = async() => {
 
 	return response.json();
 }
+
+export const logoutUser = async() => {
+
+	const url = API_CONSTANTS.USERS.POST_LOGOUT;
+
+	const response = await fetch(url, {
+		method: 'POST',
+		cache: 'no-cache',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+
+	return response.json();
+}

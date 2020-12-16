@@ -1,0 +1,26 @@
+/*************************************************************************
+*
+*
+* Header User Actions Popover
+*
+*
+*************************************************************************/
+
+.user-actions-popover {
+	min-width: 20rem;
+	padding-bottom: .5rem;
+	z-index: 1;
+
+	.popover-header > h3, .user-action {
+		white-space: nowrap;
+	}
+
+	.user-action {
+		border-bottom: 1px solid $gray-lighter;
+		cursor: pointer;
+		font-size: .875rem;
+		font-weight: lighter;
+		padding: .5rem 1rem;
+		position: relative;
+	}
+}

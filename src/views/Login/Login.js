@@ -17,7 +17,6 @@ function SqLogin(props) {
 
 	// Aliases
 	const history = useHistory();
-	// let location = useLocation();
 	const auth = useAuth();
 
 	// Store state
