@@ -46,9 +46,9 @@ function SqIcon(props) {
 
 	return (
         <span className={ 'sq-icon-wrapper' }
-              ref={ myRef }
-			  onClick={ () => handleClickInside() }>
-                <span className={ 'icon' }>X</span>
+              ref={ myRef }>
+                <span className={ 'icon' }
+					  onClick={ () => handleClickInside() }>X</span>
                 {props.hasTooltip && showSubContent &&
                     <SqTooltip type={ props.tooltipType ? props.tooltipType : 'info' }
                                position={ 'bottom-right' }

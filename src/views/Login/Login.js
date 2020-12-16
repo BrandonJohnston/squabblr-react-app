@@ -83,9 +83,6 @@ function SqLogin(props) {
 		// Call API utility function
 		loginUser(userData).then(function (response) {
 
-			console.log('loginUser() response');
-			console.log(response);
-
 			if (response.isAuthenticated) {
 
 				const authUserData = {

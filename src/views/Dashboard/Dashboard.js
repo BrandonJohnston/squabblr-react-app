@@ -1,17 +1,17 @@
 import React from 'react';
 
-function SqHome() {
+function Dashboard() {
 
 	return (
-		<div className={'general-module about-page'}>
+		<div className={'general-module dashboard'}>
 			<div className={'mod-header-wrapper'}>
-				<h2>Home</h2>
+				<h2>Dashboard</h2>
 			</div>
 			<div className={'mod-body-wrapper'}>
-				<p>home content here</p>
+				dashboard content
 			</div>
 		</div>
 	);
 }
 
-export default SqHome;
+export default Dashboard;
