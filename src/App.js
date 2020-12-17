@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useLocation, useHistory, Switch, Route } from 'react-router-dom';
 import { PrivateRoute, useAuth } from "./utils/Auth/AuthUtils";
 
@@ -20,6 +20,7 @@ import SqFooter from "./views/Layout/Footer/Footer";
 
 // Import Utility Functions
 import { getUserData } from "./utils/Users/UsersUtils";
+import PostSignupFunnel from "./views/PostSignupFunnel/PostSignupFunnel";
 
 function App() {
 
@@ -33,36 +34,14 @@ function App() {
 	const isLoading = useSelector(SELECT_LOADING);
 	const isAuth = useSelector(SELECT_ISAUTH);
 
-	// Check to see if the user is logged in or has an active session
-	useEffect(() => {
 
-		if (!isAuth) {
-			checkForUser();
-		}
-	}, [isAuth]);
-
-	/*
-	 * checkForUser - check if a user is already authenticated
-	 */
-	function checkForUser() {
-
-		getUserData().then(function(response) {
-
-			// User has a session
-			if (response.isAuthenticated) {
-
-				handleUserData(response);
-			} else {
-
-				dispatch(SET_LOADING(false));
-			}
-		});
-	}
-
+	/**************************************************************************
+	 * Create callback functions
+	 *************************************************************************/
 	/*
 	 * handleUserData - process userdata if it exists (save in store)
 	 */
-	function handleUserData(userdata) {
+	const handleUserData = useCallback( (userdata) => {
 
 		const authUserData = {
 			username: userdata.username,
@@ -86,7 +65,38 @@ function App() {
 
 			dispatch(SET_LOADING(false));
 		});
-	}
+	}, [auth, dispatch, history, location]);
+
+	/*
+	 * checkForUser - check if a user is already authenticated
+	 */
+	const checkForUser = useCallback(() => {
+
+		getUserData().then(function(response) {
+
+			// User has a session
+			if (response.isAuthenticated) {
+
+				handleUserData(response);
+			} else {
+
+				dispatch(SET_LOADING(false));
+			}
+		});
+	}, [dispatch, handleUserData]);
+
+
+	/**************************************************************************
+	 * Create useEffect functions
+	 *************************************************************************/
+	// Check to see if the user is logged in or has an active session
+	useEffect(() => {
+
+		if (!isAuth) {
+			checkForUser();
+		}
+	}, [isAuth, checkForUser]);
+
 
     return (
         <div className="page-frame">
@@ -94,10 +104,10 @@ function App() {
 
 			<Switch>
 				<Route path={'/'} exact>
-					<SqHome/>
+					<SqHome />
 				</Route>
 				<Route path={'/about'}>
-					<SqAbout/>
+					<SqAbout />
 				</Route>
 				<Route path={'/signup'}>
 					<SqSignup isLoading={ isLoading } />
@@ -105,8 +115,11 @@ function App() {
 				<Route path={'/login'}>
 					<SqLogin isLoading={ isLoading } />
 				</Route>
+				<PrivateRoute path={'/post-signup'}>
+					<PostSignupFunnel />
+				</PrivateRoute>
 				<PrivateRoute path={'/dashboard'}>
-					<Dashboard/>
+					<Dashboard />
 				</PrivateRoute>
 			</Switch>
 

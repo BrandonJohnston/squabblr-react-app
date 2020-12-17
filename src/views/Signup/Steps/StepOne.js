@@ -20,6 +20,7 @@ function SqSignupStepOne(props) {
 	 * (@boolean) usernameInvalid - is the username invalid
 	 * (@string) passwordVal - default value of password input
 	 * (@boolean) passwordInvalid - is the password invalid
+	 * (@function) keyDownCallBack - function to process key events
 	 */
 
 	// Local state / variables
@@ -124,7 +125,9 @@ function SqSignupStepOne(props) {
 					 inputType={ 'text' }
 					 invalid={ !props.usernameAvailable || props.usernameInvalid  }
 					 icon={ getUsernameIcon() }
-					 onChange={ (value) => onUsernameChange(value) } />
+					 onChange={ (value) => onUsernameChange(value) }
+					 onKeyDown={ props.keyDownCallBack }
+					 autofocus={ true } />
 
 			<SqInput placeholder={ 'Enter a Password' }
 					 label={ 'Password' }
@@ -133,7 +136,8 @@ function SqSignupStepOne(props) {
 					 inputType={ 'password' }
 					 invalid={ props.passwordInvalid }
 					 icon={ getPasswordIcon() }
-					 onChange={ (value) => onPasswordChange(value) } />
+					 onChange={ (value) => onPasswordChange(value) }
+					 onKeyDown={ props.keyDownCallBack } />
 		</div>
 	);
 }

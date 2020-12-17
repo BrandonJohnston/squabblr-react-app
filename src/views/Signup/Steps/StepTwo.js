@@ -18,6 +18,7 @@ function SqSignupStepTwo(props) {
 	 * (@string) emailVal - default value of email input
 	 * (@boolean) emailInvalid - is the email invalid
 	 * (@string) nameVal - default value of name input
+	 * (@function) keyDownCallBack - function to process key events
 	 */
 
 	// Local state / variables
@@ -105,7 +106,9 @@ function SqSignupStepTwo(props) {
 					 inputType={ 'email' }
 					 invalid={ props.emailInvalid }
 					 icon={ getEmailIcon() }
-					 onBlur={ (value) => onEmailBlur(value) } />
+					 onBlur={ (value) => onEmailBlur(value) }
+					 onKeyDown={ props.keyDownCallBack }
+					 autofocus={ true } />
 
 			<SqInput placeholder={ 'Enter your Name' }
 					 label={ 'Name' }
@@ -113,7 +116,8 @@ function SqSignupStepTwo(props) {
 					 defaultValue={ props.nameVal }
 					 inputType={ 'text' }
 					 icon={ getNameIcon() }
-					 onChange={ (value) => onNameChange(value) } />
+					 onChange={ (value) => onNameChange(value) }
+					 onKeyDown={ props.keyDownCallBack } />
 		</div>
 	);
 }

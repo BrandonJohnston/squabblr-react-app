@@ -11,6 +11,8 @@ function SqInput(props) {
 	 * (@string) defaultValue - default value for input element
 	 * (@function) onChange - function to call when input value changes
 	 * (@function) onBlur - function to call when user blur input
+	 * (@function) onKeyDown - function to call when user presses a key
+	 * (@boolean) autofocus - should the input auto focus
 	 */
 
 	const [inputFilled, setInputFilled] = useState(false);
@@ -39,6 +41,16 @@ function SqInput(props) {
 		}
 	}
 
+	/*
+	 * handleKeyDown - return keyCode to parent controller
+	 */
+	function handleKeyDown(event) {
+
+		if (props.onKeyDown) {
+			props.onKeyDown(event.keyCode);
+		}
+	}
+
 	return (
 		<div className={ 'sq-input-wrapper ' + props.customClass +
 			 (inputFilled ? ' input-filled' : '') +
@@ -56,6 +68,8 @@ function SqInput(props) {
 						   onFocus={ (e) => handleFocus(e) }
 						   onBlur={ (e) => handleFocus(e) }
 						   onChange={ (e) => handleChange(e) }
+						   onKeyDown={ (e) => handleKeyDown(e) }
+						   autoFocus={ props.autofocus || false }
 					/>
 					{props.icon}
 				</div>

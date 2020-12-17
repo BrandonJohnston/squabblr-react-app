@@ -63,6 +63,17 @@ function SqLogin(props) {
 	}
 
 	/*
+	 * handleKeyDown - handle key press events in input elements
+	 */
+	function handleKeyDown(keyCode) {
+
+		// Key Code 13 = 'Enter'
+		if (keyCode === 13 && !isSubmitDisabled()) {
+			handleLogin()
+		}
+	}
+
+	/*
 	 * handleLogin - user has clicked the button to login
 	 */
 	function handleLogin() {
@@ -124,20 +135,21 @@ function SqLogin(props) {
 				<h2>Login</h2>
 			</div>
 			<div className={'mod-body-wrapper'}>
-
 				<SqInput placeholder={ usernamePlaceholder }
 						 label={ usernameLabel }
 						 customClass={ 'username-input' }
 						 defaultValue={ username }
 						 inputType={ 'text' }
-						 onChange={ (value) => onUsernameChange(value) } />
+						 onChange={ (value) => onUsernameChange(value) }
+						 onKeyDown={ handleKeyDown } />
 
 				<SqInput placeholder={ passwordPlaceholder }
 						 label={ passwordLabel }
 						 customClass={ 'password-input' }
 						 defaultValue={ password }
 						 inputType={ 'password' }
-						 onChange={ (value) => onPasswordChange(value) } />
+						 onChange={ (value) => onPasswordChange(value) }
+						 onKeyDown={ handleKeyDown } />
 			</div>
 			<div className={'mod-footer-wrapper action-container'}>
 				<SqButton buttonText={ loginText }

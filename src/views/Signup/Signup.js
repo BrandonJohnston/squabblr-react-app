@@ -139,6 +139,18 @@ function SqSignup(props) {
 	}
 
 	/*
+	 * handleKeyDown - handle key press events in input elements
+	 */
+	function handleKeyDown(keyCode) {
+
+		if (keyCode === 13 && step === 1 && !isStepOneNextDisabled()) {
+			onNext();
+		} else if (keyCode === 13 && step === 2 && !isStepTwoSubmitDisabled()) {
+			onSubmit();
+		}
+	}
+
+	/*
 	 * onNext - handle 'Next' button clicks
 	 */
 	function onNext() {
@@ -199,7 +211,7 @@ function SqSignup(props) {
 				dispatch(SET_ISAUTH(true));
 
 				auth.signin( () => {
-					history.replace('/dashboard');
+					history.replace('/post-signup/rivals');
 				});
 
 			} else {
@@ -247,6 +259,13 @@ function SqSignup(props) {
 		return !usernameValid || !passwordValid;
 	}
 
+	/*
+	 * isStepTwoSubmitDisabled
+	 */
+	function isStepTwoSubmitDisabled() {
+		return emailInvalid;
+	}
+
 
 	// TODO: Create a loading state
 	if (props.isLoading) {
@@ -265,12 +284,14 @@ function SqSignup(props) {
 								 usernameAvailable={ usernameAvailable }
 								 usernameInvalid={ usernameInvalid }
 								 passwordVal={ password }
-								 passwordInvalid={ passwordInvalid } />
+								 passwordInvalid={ passwordInvalid }
+								 keyDownCallBack={ handleKeyDown } />
 			}
 			{step === 2 &&
 				<SqSignupStepTwo emailVal={ email }
 								 emailInvalid={ emailInvalid }
-								 nameVal={ name } />
+								 nameVal={ name }
+								 keyDownCallBack={ handleKeyDown } />
 			}
 			<div className={'mod-footer-wrapper equal-action-container'}>
 				<SqButton buttonText={ 'Back' }
@@ -285,8 +306,9 @@ function SqSignup(props) {
 				}
 				{step === 2 &&
 					<SqButton buttonText={ 'Submit' }
-							buttonType={ 'button-primary' }
-							onClick={ () => onSubmit() }/>
+							  buttonType={ 'button-primary' }
+							  onClick={ () => onSubmit() }
+							  isDisabled={ isStepTwoSubmitDisabled() } />
 				}
 			</div>
 		</div>
