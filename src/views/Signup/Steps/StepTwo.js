@@ -8,7 +8,7 @@ import {
 } from '../SignupSlice';
 
 // Import Components
-import SqInput from "../../../components/SqInput/SqInput";
+import SqInput from '../../../components/SqInput/SqInput';
 import SqIcon from '../../../components/SqIcon/SqIcon';
 
 

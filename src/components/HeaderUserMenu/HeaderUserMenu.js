@@ -1,13 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useAuth } from "../../utils/Auth/AuthUtils";
+import { useAuth } from '../../utils/Auth/AuthUtils';
 
 // Import Redux / State management
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
 import { SET_USERDATA, SET_ISAUTH } from '../../views/Login/UserSlice';
 
 // Import Utility Functions
-import { logoutUser } from "../../utils/Users/UsersUtils";
+import { logoutUser } from '../../utils/Users/UsersUtils';
 
 function HeaderUserMenu() {
 

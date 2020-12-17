@@ -1,15 +1,15 @@
 import React from 'react';
 
 // Import Redux / State management
-import { useSelector } from "react-redux";
-import { SELECT_LOADING, SELECT_ISAUTH, SELECT_USERDATA } from "../../Login/UserSlice";
+import { useSelector } from 'react-redux';
+import { SELECT_LOADING, SELECT_ISAUTH, SELECT_USERDATA } from '../../Login/UserSlice';
 
 // Import Templates
-import HeaderUserMenu from "../../../components/HeaderUserMenu/HeaderUserMenu";
+import HeaderUserMenu from '../../../components/HeaderUserMenu/HeaderUserMenu';
 
 // Import Components
-import SqIcon from "../../../components/SqIcon/SqIcon";
-import SqPopover from "../../../components/SqPopover/SqPopover";
+import SqIcon from '../../../components/SqIcon/SqIcon';
+import SqPopover from '../../../components/SqPopover/SqPopover';
 
 function SqHeader() {
 

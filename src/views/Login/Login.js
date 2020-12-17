@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useAuth } from "../../utils/Auth/AuthUtils";
+import { useAuth } from '../../utils/Auth/AuthUtils';
 
 // Import Redux / State management
 import { useDispatch } from 'react-redux';
 import { SET_USERDATA, SET_ISAUTH } from './UserSlice';
 
 // Import Components
-import SqInput from "../../components/SqInput/SqInput";
-import SqButton from "../../components/SqButton/SqButton";
+import SqInput from '../../components/SqInput/SqInput';
+import SqButton from '../../components/SqButton/SqButton';
 
 // Import Utility Functions
-import { loginUser } from "../../utils/Users/UsersUtils";
+import { loginUser } from '../../utils/Users/UsersUtils';
 
 function SqLogin(props) {
 

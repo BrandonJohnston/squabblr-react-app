@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
-import { useAuth } from "../../utils/Auth/AuthUtils";
+import { useHistory } from 'react-router-dom';
+import { useAuth } from '../../utils/Auth/AuthUtils';
 
 // Import Redux / State management
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,20 +8,20 @@ import {
 	INCREMENT_STEP, DECREMENT_STEP,
 	SELECT_STEP, SELECT_USERNAME, SELECT_PASSWORD, SELECT_EMAIL, SELECT_NAME,
 } from './SignupSlice';
-import { SET_ISAUTH, SET_USERDATA } from "../Login/UserSlice";
+import { SET_ISAUTH, SET_USERDATA } from '../Login/UserSlice';
 
 // Import Templates
-import SqSignupStepOne from "./Steps/StepOne";
-import SqSignupStepTwo from "./Steps/StepTwo";
+import SqSignupStepOne from './Steps/StepOne';
+import SqSignupStepTwo from './Steps/StepTwo';
 
 // Import Components
-import SqButton from "../../components/SqButton/SqButton";
+import SqButton from '../../components/SqButton/SqButton';
 
 // Import Utility Functions
-import { checkUsernameIsAvailable, createUser } from "../../utils/Users/UsersUtils";
+import { checkUsernameIsAvailable, createUser } from '../../utils/Users/UsersUtils';
 
 // Import Constants
-import { EMAIL_REGEX, LETTER_NUMBER_REGEX, LETTER_NUMBER_SPECIAL_REGEX } from "../../utils/GeneralConstants";
+import { EMAIL_REGEX, LETTER_NUMBER_REGEX, LETTER_NUMBER_SPECIAL_REGEX } from '../../utils/GeneralConstants';
 
 // Signup Function
 function SqSignup(props) {

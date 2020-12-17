@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 // Import Redux / State management
 import { useSelector } from 'react-redux';
-import { SELECT_ISAUTH, SELECT_LOADING } from "../../Login/UserSlice";
+import { SELECT_ISAUTH, SELECT_LOADING } from '../../Login/UserSlice';
 
 function SqFooter(props) {
 

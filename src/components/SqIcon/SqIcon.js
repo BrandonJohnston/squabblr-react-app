@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 // Import Components
-import SqTooltip from "../SqTooltip/SqTooltip";
+import SqTooltip from '../SqTooltip/SqTooltip';
 
 function SqIcon(props) {
 

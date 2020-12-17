@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, useRouteMatch } from 'react-router-dom';
-import { PrivateRoute } from "../../utils/Auth/AuthUtils";
+import { PrivateRoute } from '../../utils/Auth/AuthUtils';
 
 // Import Templates
-import PostSignupAddRivals from "./AddRivals/PostSignupAddRivals";
+import PostSignupAddRivals from './AddRivals/PostSignupAddRivals';
 
 
 function PostSignupFunnel() {

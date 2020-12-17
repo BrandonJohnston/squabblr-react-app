@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { useLocation, useHistory, Switch, Route } from 'react-router-dom';
-import { PrivateRoute, useAuth } from "./utils/Auth/AuthUtils";
+import { PrivateRoute, useAuth } from './utils/Auth/AuthUtils';
 
 // Import Redux / State management
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,17 +10,17 @@ import {
 } from './views/Login/UserSlice';
 
 // Import Templates
-import SqHeader from "./views/Layout/Header/Header";
-import SqHome from "./views/Home/Home";
-import SqAbout from "./views/About/About";
-import SqSignup from "./views/Signup/Signup";
-import SqLogin from "./views/Login/Login";
-import Dashboard from "./views/Dashboard/Dashboard";
-import SqFooter from "./views/Layout/Footer/Footer";
+import SqHeader from './views/Layout/Header/Header';
+import SqHome from './views/Home/Home';
+import SqAbout from './views/About/About';
+import SqSignup from './views/Signup/Signup';
+import SqLogin from './views/Login/Login';
+import Dashboard from './views/Dashboard/Dashboard';
+import SqFooter from './views/Layout/Footer/Footer';
 
 // Import Utility Functions
-import { getUserData } from "./utils/Users/UsersUtils";
-import PostSignupFunnel from "./views/PostSignupFunnel/PostSignupFunnel";
+import { getUserData } from './utils/Users/UsersUtils';
+import PostSignupFunnel from './views/PostSignupFunnel/PostSignupFunnel';
 
 function App() {
 
@@ -99,7 +99,7 @@ function App() {
 
 
     return (
-        <div className="page-frame">
+        <div className={ 'page-frame' }>
 			<SqHeader />
 
 			<Switch>

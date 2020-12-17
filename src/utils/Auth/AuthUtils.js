@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useState } from "react";
-import { Redirect, Route } from "react-router-dom";
+import React, { createContext, useContext, useState } from 'react';
+import { Redirect, Route } from 'react-router-dom';
 
 // Import Redux / State management
-import { useSelector } from "react-redux";
-import { SELECT_LOADING } from "../../views/Login/UserSlice";
+import { useSelector } from 'react-redux';
+import { SELECT_LOADING } from '../../views/Login/UserSlice';
 
 const sqAuth = {
 	isAuthenticated: false,
@@ -38,7 +38,7 @@ function useProvideAuth() {
 
 	const signin = cb => {
 		return sqAuth.signin(() => {
-			setUser("user");
+			setUser('user');
 			cb();
 		});
 	};
@@ -81,7 +81,7 @@ export const PrivateRoute = ({ children, ...rest }) => {
 				) : (
 					<Redirect
 						to={{
-							pathname: "/login",
+							pathname: '/login',
 							state: { from: location }
 						}}
 					/>

@@ -1,4 +1,4 @@
-import { API_CONSTANTS } from "../ApiConstants";
+import { API_CONSTANTS } from '../ApiConstants';
 
 export const checkUsernameIsAvailable = async(name) => {
 
