@@ -48,6 +48,10 @@ function SqSignup(props) {
 	const [submitButtonProcessing, setSubmitButtonProcessing] = useState(false);
 	const [usernameTimeout, setUsernameTimeout] = useState();
 
+
+	/**************************************************************************
+	 * Create useEffect functions
+	 *************************************************************************/
 	// Handle updates to username
 	useEffect(() => {
 		onUsernameChange(username);
@@ -211,7 +215,7 @@ function SqSignup(props) {
 				dispatch(SET_ISAUTH(true));
 
 				auth.signin( () => {
-					history.replace('/post-signup/rivals');
+					history.push('/post-signup/rivals');
 				});
 
 			} else {

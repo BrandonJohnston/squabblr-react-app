@@ -5,5 +5,8 @@ export const API_CONSTANTS = {
 		GET_USER: '/api/users/user',
 		POST_LOGIN: '/api/users/login',
 		POST_LOGOUT: '/api/users/logout'
+	},
+	RIVALS: {
+		GET_RIVAL_OPTIONS: '/api/rivals/getRivalOptions'
 	}
 };

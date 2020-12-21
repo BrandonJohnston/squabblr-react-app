@@ -18,10 +18,10 @@ function SqFooter(props) {
 		return (
 			<>
 				<li>
-					<Link to="/login">Login</Link>
+					<Link to={ '/login' }>Login</Link>
 				</li>
 				<li>
-					<Link to="/signup">Signup</Link>
+					<Link to={ '/signup' }>Signup</Link>
 				</li>
 			</>
 		);
@@ -34,7 +34,7 @@ function SqFooter(props) {
 		return (
 			<>
 				<li>
-					<Link to="/dashboard">Dashboard</Link>
+					<Link to={ '/dashboard' }>Dashboard</Link>
 				</li>
 			</>
 		);
@@ -57,10 +57,10 @@ function SqFooter(props) {
 			<div className={'mod-body-wrapper'}>
 				<ul className={'footer-links-list inline-list'}>
 					<li>
-						<Link to="/">Home</Link>
+						<Link to={ '/' }>Home</Link>
 					</li>
 					<li>
-						<Link to="/about">About</Link>
+						<Link to={ '/about' }>About</Link>
 					</li>
 					{!isLoading && !isAuth && (
 						getUnAuthedLinks()

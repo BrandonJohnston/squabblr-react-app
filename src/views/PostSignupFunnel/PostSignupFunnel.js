@@ -4,6 +4,11 @@ import { PrivateRoute } from '../../utils/Auth/AuthUtils';
 
 // Import Templates
 import PostSignupAddRivals from './AddRivals/PostSignupAddRivals';
+import PostSignupAddSquabble from './AddSquabble/PostSignupAddSquabble';
+
+// Import Components
+import SqMultiStep from '../../components/SqMultiStep/SqMultiStep';
+import SqStep from '../../components/SqStep/SqStep';
 
 
 function PostSignupFunnel() {
@@ -12,23 +17,24 @@ function PostSignupFunnel() {
 	const match = useRouteMatch();
 
 	return (
-		<div className={'general-module dashboard'}>
-			<div className={'mod-header-wrapper'}>
-				<h2>Post Signup Funnel</h2>
-			</div>
-			<div className={'mod-body-wrapper'}>
-				post signup funnel - add your first rival
-
-				<Switch>
-					<PrivateRoute path={`${match.path}/rivals`}>
+		<Switch>
+			<SqMultiStep customClass={ 'post-signup-module' }>
+				<SqStep stepHeader={ 'Add Rivals' }
+						path={ `${match.path}/rivals` }
+						enabled={ true }>
+					<PrivateRoute path={ `${match.path}/rivals` }>
 						<PostSignupAddRivals />
 					</PrivateRoute>
-					<PrivateRoute path={`${match.path}/squabble`}>
-						<p>subroute two</p>
+				</SqStep>
+				<SqStep stepHeader={ 'Start a Squabble' }
+						path={ `${match.path}/squabble` }
+						enabled={ true }>
+					<PrivateRoute path={ `${match.path}/squabble` }>
+						<PostSignupAddSquabble />
 					</PrivateRoute>
-				</Switch>
-			</div>
-		</div>
+				</SqStep>
+			</SqMultiStep>
+		</Switch>
 	);
 }
 

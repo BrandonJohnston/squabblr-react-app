@@ -36,15 +36,24 @@
 	> .mod-footer-restricted {
 		padding: 1.5rem 2rem;
 
-		&.action-container,
 		&.equal-action-container {
 			padding: 0;
 		}
 
 		&.action-container {
+			align-items: center;
+			display: flex;
+			justify-content: flex-end;
+
+			> .secondary-action {
+				cursor: pointer;
+				font-size: .875rem;
+				font-weight: lighter;
+				padding: .5rem 1rem;
+			}
 
 			> .button {
-				display: block;
+				display: inline-block;
 			}
 		}
 
