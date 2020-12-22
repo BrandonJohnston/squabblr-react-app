@@ -108,7 +108,7 @@ function SqLogin(props) {
 				dispatch(SET_ISAUTH(true));
 
 				auth.signin( () => {
-					history.replace('/dashboard');
+					history.push('/dashboard');
 				});
 
 			} else {

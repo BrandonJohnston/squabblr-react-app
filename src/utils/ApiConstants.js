@@ -7,6 +7,7 @@ export const API_CONSTANTS = {
 		POST_LOGOUT: '/api/users/logout'
 	},
 	RIVALS: {
-		GET_RIVAL_OPTIONS: '/api/rivals/getRivalOptions'
+		GET_RIVAL_OPTIONS: '/api/rivals/getRivalOptions',
+		POST_ADD_RIVALS: '/api/rivals/addRivals'
 	}
 };

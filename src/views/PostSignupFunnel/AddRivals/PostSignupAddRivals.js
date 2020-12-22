@@ -1,27 +1,47 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+// Import Redux / State management
+import { useSelector, useDispatch } from 'react-redux';
+import {
+	SET_RIVAL_OPTIONS,
+	SELECT_RIVAL_OPTIONS,
+	SELECT_ADDED_RIVALS
+} from '../PostSignupSlice';
+
 // Import Components
 import SqInput from '../../../components/SqInput/SqInput';
 import SqButton from '../../../components/SqButton/SqButton';
+import RivalsList from '../../../components/RivalsList/RivalsList';
 
 // Import Utility Functions
-import { findRivalsByUsernameOrEmail } from '../../../utils/Rivals/RivalsUtils';
+import { findRivalsByUsernameOrEmail, addRivals } from '../../../utils/Rivals/RivalsUtils';
 
 // Import Constants
 //
+
 
 function PostSignupAddRivals() {
 
 	// Aliases
 	const history = useHistory();
+	const dispatch = useDispatch();
+
+	// Store state
+	const rivalOptions = useSelector(SELECT_RIVAL_OPTIONS);
+	const addedRivals = useSelector(SELECT_ADDED_RIVALS);
+
 
 	// Local state / variables
+	const [rivalNameInput, setRivalNameInput] = useState('');
 	const [rivalNameTimeout, setRivalNameTimeout] = useState();
+	const [rivalOptionsLoading, setRivalOptionsLoading] = useState(false);
+	const [rivalOptionsMap, setRivalOptionsMap] = useState({});
+
 
 	const rivalLabel = 'Find a Rival';
 	const rivalPlaceholder = 'Enter Username or Email';
-	let rivalDefaultVal = ''; // TODO: This needs to come from the Store
+	const rivalDefaultVal = '';
 
 
 	/*
@@ -29,17 +49,14 @@ function PostSignupAddRivals() {
 	 */
 	function onRivalNameChange(inputName) {
 
-		console.log('onRivalNameChange()');
-		console.log(inputName);
-
 		// Clear usernameTimeout when user types
 		if (rivalNameTimeout) {
 			clearTimeout(rivalNameTimeout);
 		}
 
-
-
-		// update the store with new input
+		// save current input to local state
+		setRivalNameInput(inputName);
+		setRivalOptionsLoading(true);
 
 		// query API for matching names
 		// Set a timeout to check for username availability
@@ -49,6 +66,11 @@ function PostSignupAddRivals() {
 				1500
 			));
 		}
+
+		if (inputName.length === 0) {
+			dispatch(SET_RIVAL_OPTIONS([]));
+			setRivalOptionsLoading(false);
+		}
 	}
 
 	/*
@@ -56,14 +78,30 @@ function PostSignupAddRivals() {
 	 */
 	function getRivalOptions(inputName) {
 
-		console.log('getRivalOptions()');
-		console.log(inputName);
+		if (rivalOptionsMap[inputName]) {
 
-		findRivalsByUsernameOrEmail(inputName).then(function (response) {
+			// set map data into the Store
+			dispatch(SET_RIVAL_OPTIONS(rivalOptionsMap[inputName]));
 
-			console.log('response');
-			console.log(response);
-		});
+			// no longer loading
+			setRivalOptionsLoading(false);
+
+		} else {
+
+			findRivalsByUsernameOrEmail(inputName).then(function (response) {
+
+				// update map with new responses
+				const mapCopy = {...rivalOptionsMap};
+				mapCopy[inputName] = response.usernames;
+				setRivalOptionsMap(mapCopy);
+
+				// set map data into the Store
+				dispatch(SET_RIVAL_OPTIONS(mapCopy[inputName]));
+
+				// no longer loading
+				setRivalOptionsLoading(false);
+			});
+		}
 	}
 
 	/*
@@ -78,13 +116,30 @@ function PostSignupAddRivals() {
 	 */
 	function isContinueDisabled() {
 
-		return true;
+		return addedRivals.length === 0;
 	}
 
 	/*
 	 * handleContinue - continue to next step
 	 */
 	function handleContinue() {
+
+		console.log('handleContinue()');
+
+		if (addedRivals.length < 1) {
+			return;
+		}
+
+		addRivals(addedRivals).then(function(response) {
+			console.log('addRivals response');
+			console.log(response);
+
+			// TODO: Save new rivals to store
+			//
+
+			// Move to next state
+			history.push('/post-signup/squabble');
+		});
 
 	}
 
@@ -100,14 +155,18 @@ function PostSignupAddRivals() {
 						 label={ rivalLabel }
 						 customClass={ 'rival-name-input' }
 						 defaultValue={ rivalDefaultVal }
-						 inputType={ 'password' }
+						 inputType={ 'text' }
 						 onChange={ (value) => onRivalNameChange(value) } />
+
+				<RivalsList rivals={ rivalOptions }
+							shouldShowResults={ rivalNameInput.length > 0 }
+							isLoading={ rivalOptionsLoading } />
 			</div>
 			<div className={ 'mod-footer-wrapper action-container' }>
 				<span className={ 'secondary-action' }
 					  onClick={ () => handleSkip() }>Skip</span>
 				<SqButton buttonText={ 'Continue' }
-						  buttonType={ 'button-general' }
+						  buttonType={ 'button-primary' }
 						  onClick={ () => handleContinue() }
 						  isDisabled={ isContinueDisabled() } />
 			</div>
